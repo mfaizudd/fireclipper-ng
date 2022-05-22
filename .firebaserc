@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "fireclipper-f719b": {
+      "hosting": {
+        "fireclipper-ng": [
+          "fireclipper-f719b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "fireclipper-f719b"
+  }
+}

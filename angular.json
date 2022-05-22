@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "fireclipper-ng:build:production",
+            "firebaseProject": "fireclipper-f719b",
+            "firebaseHostingSite": "fireclipper-f719b"
+          }
         }
       }
     }
