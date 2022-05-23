@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { RxFormBuilder, RxFormGroup, RxwebValidators } from '@rxweb/reactive-form-validators';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { ClipboardItem } from 'src/app/models/clipboard-item';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmationService } from 'primeng/api';
+import copy from 'copy-text-to-clipboard';
 
 @Component({
   selector: 'app-clipboards',
@@ -68,6 +69,7 @@ export class ClipboardsComponent implements OnInit {
   async delete(event: any, clipId: string) {
     this.confirmationService.confirm({
       target: event.target,
+      acceptButtonStyleClass: 'p-button-danger',
       message: 'Are you sure that you want to proceed?',
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
@@ -89,4 +91,7 @@ export class ClipboardsComponent implements OnInit {
 
   }
 
+  copy(clip: ClipboardItem) {
+    copy(clip.content);
+  }
 }

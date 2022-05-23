@@ -17,6 +17,13 @@
         class="p-button-danger"
         (click)="delete($event, item.id ?? '')"
       ></button>
+      <button
+        pButton
+        icon="pi pi-copy"
+        label="Copy"
+        style="margin-left: .5em;"
+        (click)="copy(item)"
+      ></button>
     </ng-template>
   </p-card>
 </div>
