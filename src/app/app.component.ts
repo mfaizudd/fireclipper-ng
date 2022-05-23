@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -16,37 +14,21 @@ export class AppComponent {
       label: 'Home',
       routerLink: '/',
     },
-    // {
-    //   label: 'Edit',
-    //   icon: 'pi pi-fw pi-pencil',
-    //   items: [
-    //     { label: 'Delete', icon: 'pi pi-fw pi-trash' },
-    //     { label: 'Refresh', icon: 'pi pi-fw pi-refresh' }
-    //   ]
-    // }
+    {
+      label: 'Clipboards',
+      routerLink: '/clipboards'
+    }
   ]
   signedIn = false;
 
   constructor(
-    private auth: AngularFireAuth,
-    private firestore: AngularFirestore
+    private auth: AuthService,
   ) {
-    auth.authState.subscribe(x => this.signedIn = x != null);
+    auth.getState().subscribe(x => this.signedIn = x != null);
   }
 
   async signIn() {
-    const response = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    if (response) {
-      if (response.additionalUserInfo?.isNewUser) {
-        this.firestore
-          .collection('users')
-          .doc(response.user?.uid)
-          .set({
-            displayName: response.user?.displayName,
-            email: response.user?.email
-          });
-      }
-    }
+    this.auth.signIn()
   }
 
   async signOut() {

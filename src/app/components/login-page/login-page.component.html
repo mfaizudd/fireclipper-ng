@@ -1,0 +1,11 @@
+<h2 class="is-size-4">Login</h2>
+<p>Please log in first</p>
+<button
+  *ngIf="!signedIn"
+  type="button"
+  pButton
+  label="Login with google"
+  icon="pi pi-sign-in"
+  style="margin-left: 0.25em"
+  (click)="signIn()"
+></button>
