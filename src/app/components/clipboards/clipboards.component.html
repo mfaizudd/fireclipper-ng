@@ -1,10 +1,26 @@
 <h2 class="is-size-2 block">Clipboards</h2>
-<button pButton class="block" (click)="toggleDialog()">Add new Clipboard</button>
+<button pButton class="block" (click)="toggleDialog()">
+  Add new Clipboard
+</button>
 <div class="columns">
-  <p-card class="column is-one-third" *ngFor="let item of clipboards|async">
-    {{item.content}}
+  <p-card
+    styleClass="p-card-shadow"
+    class="column is-one-third"
+    *ngFor="let item of clipboards | async"
+  >
+    <p>{{ item.content }}</p>
+    <ng-template pTemplate="footer">
+      <button
+        pButton
+        icon="pi pi-trash"
+        label="Delete"
+        class="p-button-danger"
+        (click)="delete($event, item.id ?? '')"
+      ></button>
+    </ng-template>
   </p-card>
 </div>
+<p-confirmPopup></p-confirmPopup>
 <p-dialog
   [modal]="true"
   header="Add new clipboard item"
@@ -14,11 +30,12 @@
   <form [formGroup]="clipboardForm" (ngSubmit)="onSubmit()">
     <div class="block">
       <label for="content" class="row">Content</label>
-      <textarea pInputTextarea
+      <textarea
+        pInputTextarea
         formControlName="content"
         [class.p-error]="clipboardForm.controls['content'].errors != null"
         class="row"
-        style="width: 100%;"
+        style="width: 100%"
       ></textarea>
       <small
         class="p-error"

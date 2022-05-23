@@ -25,6 +25,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CardModule } from 'primeng/card';
 import { DialogModule} from 'primeng/dialog';
 import { EditorModule } from 'primeng/editor';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 // Components
 import { HomeComponent } from './components/home/home.component';
@@ -58,6 +59,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     CardModule,
     DialogModule,
     EditorModule,
+    ConfirmPopupModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
