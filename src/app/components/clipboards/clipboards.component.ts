@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { RxFormBuilder, RxFormGroup, RxwebValidators } from '@rxweb/reactive-form-validators';
+import { Observable } from 'rxjs';
+import { ClipboardItem } from 'src/app/models/clipboard-item';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-clipboards',
@@ -16,11 +20,25 @@ export class ClipboardsComponent implements OnInit {
     ]
   });
   formVisible = false;
+  clipboards: Observable<ClipboardItem[]>|null = null;
 
   constructor(
     private formBuilder: RxFormBuilder,
-    private firestore: AngularFirestore
-  ) { }
+    private auth: AuthService,
+    private firestore: AngularFirestore,
+    private router: Router
+  ) {
+    this.auth
+      .getUser()
+      .then(user => {
+        if (!user) router.navigate(['login']);
+        this.clipboards = this.firestore
+          .collection('users')
+          .doc(user?.uid)
+          .collection<ClipboardItem>('clips')
+          .valueChanges()
+      })
+  }
 
   ngOnInit(): void {
   }
@@ -29,8 +47,22 @@ export class ClipboardsComponent implements OnInit {
     this.formVisible = !this.formVisible;
   }
 
-  onSubmit() {
-
+  async onSubmit() {
+    console.log('getting user info...')
+    const user = await this.auth.getUser();
+    if (!user) {
+      this.router.navigate(['login']);
+    }
+    console.log('submitting...')
+    const { content } = this.clipboardForm.value;
+    const item: ClipboardItem = { content }
+    await this.firestore
+      .collection('users')
+      .doc(user?.uid)
+      .collection('clips')
+      .add(item);
+    this.formVisible = false;
+    console.log('submitted')
   }
 
 }

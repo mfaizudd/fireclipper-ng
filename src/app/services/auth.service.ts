@@ -35,4 +35,8 @@ export class AuthService {
   getState() {
     return this.auth.authState;
   }
+
+  async getUser() {
+    return await this.auth.currentUser;
+  }
 }

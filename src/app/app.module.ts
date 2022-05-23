@@ -21,6 +21,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CardModule } from 'primeng/card';
 import { DialogModule} from 'primeng/dialog';
 import { EditorModule } from 'primeng/editor';
@@ -53,6 +54,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     MenubarModule,
     ButtonModule,
     InputTextModule,
+    InputTextareaModule,
     CardModule,
     DialogModule,
     EditorModule,

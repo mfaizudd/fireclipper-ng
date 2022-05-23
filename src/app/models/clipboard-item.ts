@@ -1,5 +1,3 @@
-export class ClipboardItem {
-  constructor(
-    public content: string
-  ) { }
+export interface ClipboardItem {
+  content: string;
 }

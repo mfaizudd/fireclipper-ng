@@ -1,5 +1,8 @@
 <h2 class="is-size-2">Clipboards</h2>
 <p-button (click)="toggleDialog()">Add new Clipboard</p-button>
+<p-card *ngFor="let item of clipboards|async">
+  {{item.content}}
+</p-card>
 <p-dialog
   [modal]="true"
   header="Add new clipboard item"
@@ -7,13 +10,14 @@
   [style]="{ width: '50vw' }"
 >
   <form [formGroup]="clipboardForm" (ngSubmit)="onSubmit()">
-    <div class="field">
-      <label for="content" class="block">Content</label>
-      <p-editor
+    <div class="block">
+      <label for="content" class="row">Content</label>
+      <textarea pInputTextarea
         formControlName="content"
-        [style]="{ height: '320px' }"
         [class.p-error]="clipboardForm.controls['content'].errors != null"
-      ></p-editor>
+        class="row"
+        style="width: 100%;"
+      ></textarea>
       <small
         class="p-error"
         *ngFor="
@@ -25,7 +29,7 @@
     </div>
   </form>
   <ng-template pTemplate="footer">
-    <p-button type="submit" label="Submit" onclick="onSubmit()"></p-button>
+    <p-button type="submit" label="Submit" (onClick)="onSubmit()"></p-button>
     <button
       pButton
       (click)="toggleDialog()"
