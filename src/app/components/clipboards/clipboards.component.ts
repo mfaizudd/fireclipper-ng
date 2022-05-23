@@ -48,12 +48,10 @@ export class ClipboardsComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log('getting user info...')
     const user = await this.auth.getUser();
     if (!user) {
       this.router.navigate(['login']);
     }
-    console.log('submitting...')
     const { content } = this.clipboardForm.value;
     const item: ClipboardItem = { content }
     await this.firestore
@@ -62,7 +60,6 @@ export class ClipboardsComponent implements OnInit {
       .collection('clips')
       .add(item);
     this.formVisible = false;
-    console.log('submitted')
   }
 
 }

@@ -1,8 +1,10 @@
-<h2 class="is-size-2">Clipboards</h2>
-<p-button (click)="toggleDialog()">Add new Clipboard</p-button>
-<p-card *ngFor="let item of clipboards|async">
-  {{item.content}}
-</p-card>
+<h2 class="is-size-2 block">Clipboards</h2>
+<button pButton class="block" (click)="toggleDialog()">Add new Clipboard</button>
+<div class="columns">
+  <p-card class="column is-one-third" *ngFor="let item of clipboards|async">
+    {{item.content}}
+  </p-card>
+</div>
 <p-dialog
   [modal]="true"
   header="Add new clipboard item"

@@ -1,27 +1,26 @@
-<div class="container">
-  <p-menubar [model]="items">
-    <div>
-      <input type="text" pInputText placeholder="Search" />
-      <button
-        *ngIf="signedIn"
-        type="button"
-        pButton
-        label="Logout"
-        icon="pi pi-sign-out"
-        style="margin-left: 0.25em"
-        (click)="signOut()"
-      ></button>
-      <button
-        *ngIf="!signedIn"
-        type="button"
-        pButton
-        label="Login"
-        icon="pi pi-sign-in"
-        style="margin-left: 0.25em"
-        (click)="signIn()"
-      ></button>
-    </div>
-  </p-menubar>
-  <br>
+<p-menubar [model]="items" class="block">
+  <div>
+    <input type="text" pInputText placeholder="Search" />
+    <button
+      *ngIf="signedIn"
+      type="button"
+      pButton
+      label="Logout"
+      icon="pi pi-sign-out"
+      style="margin-left: 0.25em"
+      (click)="signOut()"
+    ></button>
+    <button
+      *ngIf="!signedIn"
+      type="button"
+      pButton
+      label="Login"
+      icon="pi pi-sign-in"
+      style="margin-left: 0.25em"
+      (click)="signIn()"
+    ></button>
+  </div>
+</p-menubar>
+<div class="container block">
   <router-outlet></router-outlet>
 </div>
